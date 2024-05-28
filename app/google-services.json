@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "361841512958",
+    "project_id": "project-capstone-bec58",
+    "storage_bucket": "project-capstone-bec58.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:361841512958:android:1867e89b208d50be25b0af",
+        "android_client_info": {
+          "package_name": "com.capstone.wishata"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClf_alZQbnU7MQtSF3ezcn89k4JnrWpcE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
