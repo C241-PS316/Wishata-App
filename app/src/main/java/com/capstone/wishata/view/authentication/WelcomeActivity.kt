@@ -1,0 +1,33 @@
+package com.capstone.wishata.view.authentication
+
+import android.os.Bundle
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+import com.capstone.wishata.R
+import com.capstone.wishata.databinding.ActivityWelcomeBinding
+
+class WelcomeActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityWelcomeBinding
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        binding = ActivityWelcomeBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+
+        val welcomeFragment = WelcomeFragment()
+        val fragment = supportFragmentManager.findFragmentByTag(WelcomeFragment::class.java.simpleName)
+
+        if (fragment !is WelcomeFragment) {
+            Log.d("FlexibleFragmentKu", "Fragment name: " + WelcomeFragment::class.java.simpleName)
+            supportFragmentManager
+                .beginTransaction()
+                .add(R.id.welcome_main_container, welcomeFragment, WelcomeFragment::class.java.simpleName)
+                .commit()
+        }
+
+
+    }
+
+}
