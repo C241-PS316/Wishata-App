@@ -1,4 +1,4 @@
-package com.capstone.wishata.view.authentication.register
+package com.capstone.wishata.ui.authentication.register
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -26,6 +26,6 @@ class RegisterFragment : Fragment() {
     }
 
     companion object {
-
+        private const val TAG = "REGISTER ==="
     }
 }
