@@ -1,4 +1,4 @@
-package com.capstone.wishata.view.authentication
+package com.capstone.wishata.ui.authentication
 
 import android.os.Bundle
 import android.util.Log
