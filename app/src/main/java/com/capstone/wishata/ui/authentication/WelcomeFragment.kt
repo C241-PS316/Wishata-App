@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.enableEdgeToEdge
 import androidx.fragment.app.Fragment
 import com.capstone.wishata.R
 import com.capstone.wishata.databinding.FragmentWelcomeBinding
