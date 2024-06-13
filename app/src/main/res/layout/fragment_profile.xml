@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/blue_satin"
     tools:context=".ui.home.HomeFragment" >
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -54,6 +55,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="8dp"
+            android:background="@drawable/button_wishata_blue"
             android:text="Keluar"
             app:layout_constraintBottom_toTopOf="@+id/text_version"
             app:layout_constraintEnd_toEndOf="parent"
