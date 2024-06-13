@@ -66,10 +66,20 @@ dependencies {
     //  preference datastore
     implementation(libs.androidx.datastore.preferences)
 
-    // lifescycle
+    // ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel:2.8.2")
+    // LiveData
+    implementation("androidx.lifecycle:lifecycle-livedata:2.8.2")
 
     // navigation ui, fragment
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
+
+    //lifecyclescope
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+
+    // splash screen
+    implementation(libs.androidx.core.splashscreen)
+
 
 }

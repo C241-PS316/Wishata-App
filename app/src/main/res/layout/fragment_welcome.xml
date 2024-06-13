@@ -4,41 +4,83 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.authentication.WelcomeFragment" >
+    tools:context=".ui.authentication.WelcomeFragment"
+    android:background="#36BCFF">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
         <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
-            android:layout_marginTop="32dp"
-            android:src="@drawable/ic_launcher_background"
+            android:id="@+id/image_welcome"
+            android:layout_width="match_parent"
+            android:layout_height="360dp"
+            android:contentDescription="Gambar orang santai"
+            android:src="@drawable/relax"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/registerButton"
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/text_explore"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Explore Now"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/image_welcome" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/text_explore_desc"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="64dp"
+            android:text="Personalized travel tips for You. Discover hidden gems and sustainable adventures."
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_explore" />
+
+        <Button
+            android:id="@+id/registerButton"
+            android:layout_width="match_parent"
             android:layout_height="64dp"
+            android:layout_marginStart="64dp"
+            android:layout_marginEnd="64dp"
             android:layout_marginBottom="32dp"
-            android:text="Daftar"
+            android:background="@drawable/button_wishata_white"
+            android:text="Sign Up"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <com.google.android.material.button.MaterialButton
-            android:layout_width="wrap_content"
+        <Button
+            android:layout_width="match_parent"
             android:layout_height="64dp"
+            android:layout_marginStart="64dp"
+            android:layout_marginEnd="64dp"
             android:layout_marginBottom="16dp"
-            android:text="Masuk"
+            android:background="@drawable/button_wishata_white"
+            android:text="Login"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toTopOf="@+id/registerButton"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
