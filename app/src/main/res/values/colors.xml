@@ -5,4 +5,12 @@
 
     <color name="alto">#787878</color>
 
+
+    <!--Palete From Figma-->
+    <color name="skyblue">#00A9FF</color>
+    <color name="blue_satin">#E7FBFF</color>
+    <color name="light_blue">#CDF5FD</color>
+    <color name="orange">#FFB703</color>
+    <color name="dark_blue">#023047</color>
+
 </resources>
