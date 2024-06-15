@@ -9,7 +9,7 @@ object Injection {
     fun provideStoryRepository(context: Context): WishataRepository {
         // get token from datastore
 
-        val apiService = ApiConfig.getApiService()
+        val apiService = ApiConfig.getApiService(context)
 
         return WishataRepository.getInstance(apiService)
     }
