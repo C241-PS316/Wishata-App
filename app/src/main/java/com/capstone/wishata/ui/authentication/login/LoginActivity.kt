@@ -7,12 +7,11 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.capstone.wishata.data.network.response.LoginResponse
 import com.capstone.wishata.databinding.ActivityLoginBinding
 import com.capstone.wishata.ui.main.MainActivity
 import com.capstone.wishata.viewmodel.LoginViewModel
 import com.capstone.wishata.viewmodel.factory.ViewModelFactory
-import com.capstone.wishata.utils.Status
+import com.capstone.wishata.utils.Result
 import com.capstone.wishata.utils.showToast
 
 class LoginActivity : AppCompatActivity() {
@@ -40,11 +39,11 @@ class LoginActivity : AppCompatActivity() {
             loginViewModel.login(username, password).observe(this) {
                 if (it != null) {
                     when(it) {
-                        is Status.Loading -> {}
-                        is Status.Success -> {
+                        is Result.Loading-> {}
+                        is Result.Success -> {
                             processLogin(username)
                         }
-                        is Status.Error -> {
+                        is Result.Error -> {
                             showToast(it.error, this)
                         }
                     }

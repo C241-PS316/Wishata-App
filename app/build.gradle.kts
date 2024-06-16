@@ -87,8 +87,5 @@ dependencies {
     //lifecyclescope
     implementation(libs.androidx.lifecycle.runtime.ktx)
 
-    // splash screen
-    implementation(libs.androidx.core.splashscreen)
-
 
 }
