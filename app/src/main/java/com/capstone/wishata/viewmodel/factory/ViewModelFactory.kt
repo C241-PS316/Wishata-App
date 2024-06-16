@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.capstone.wishata.injection.Injection
 import com.capstone.wishata.repository.WishataRepository
+import com.capstone.wishata.viewmodel.HomeViewModel
 import com.capstone.wishata.viewmodel.LoginViewModel
 import com.capstone.wishata.viewmodel.RegisterViewModel
 import com.capstone.wishata.viewmodel.WishlistViewModel
@@ -22,6 +23,9 @@ class ViewModelFactory(private val repository: WishataRepository): ViewModelProv
             }
             modelClass.isAssignableFrom(WishlistViewModel::class.java) -> {
                 WishlistViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
+                HomeViewModel(repository) as T
             }
 
 

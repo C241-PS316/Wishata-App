@@ -84,4 +84,11 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)
 
+    //lifecyclescope
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+
+    // splash screen
+    implementation(libs.androidx.core.splashscreen)
+
+
 }

@@ -1,5 +1,7 @@
 package com.capstone.wishata.repository
 
+import android.annotation.SuppressLint
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
@@ -37,6 +39,37 @@ class WishataRepository(
 
     private suspend fun saveUsername(username: String) {
         appPreferences.saveUsername(username)
+    }
+    fun register(
+        username: String,
+        email: String,
+        password: String,
+        confirmPassword: String
+    ): LiveData<Result<RegisterResponse>> = liveData {
+        emit(Result.Loading)
+        try {
+            val response = apiService.register(username, email, password, confirmPassword)
+            emit(Result.Success(response))
+        } catch (e: HttpException) {
+            val jsonInString = e.response()?.errorBody()?.string()
+            val errorBody = Gson().fromJson(jsonInString, RegisterResponse::class.java)
+            val errorMessage = errorBody.message
+            emit(Result.Error(errorMessage))
+        }
+
+    }
+
+    // get all wishata
+    //@SuppressLint("BuildListAdds")
+    fun getWisata(): LiveData<Result<List<WisataResponse>>> = liveData {
+        emit((Result.Loading))
+        try {
+            val response = apiService.getWisata()
+            val wisata = response.wisataResponse
+            //emit(wisata)
+        } catch (e: Exception) {
+            Log.d("NewsRepository", "getHeadlineNews: ${e.message.toString()} ")
+            emit(Result.Error(e.message.toString()))
     }
 
     fun getUsername(): LiveData<String> {

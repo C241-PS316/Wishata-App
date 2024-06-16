@@ -21,7 +21,7 @@ class ApiConfig {
                 .build()
 
             val retrofit = Retrofit.Builder()
-                .baseUrl("https://asia-southeast2-project-capstone-bec58.cloudfunctions.net/app/")
+                .baseUrl("https://asia-southeast2-project-capstone-bec58.cloudfunctions.net/app/auth/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()
