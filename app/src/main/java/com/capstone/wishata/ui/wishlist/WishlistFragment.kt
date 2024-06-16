@@ -8,12 +8,17 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
 import com.capstone.wishata.R
 import com.capstone.wishata.databinding.FragmentHomeBinding
 import com.capstone.wishata.databinding.FragmentWishlistBinding
-
+import com.capstone.wishata.databinding.FragmentWishlistBinding
+import com.capstone.wishata.viewmodel.WishlistViewModel
 
 class WishlistFragment : Fragment() {
+    private val wishlistViewModel: WishlistViewModel by viewModels()
 
     private var _binding: FragmentWishlistBinding? = null
     private val binding get() = _binding
@@ -35,6 +40,15 @@ class WishlistFragment : Fragment() {
 
         val navHostFragment = NavHostFragment.findNavController(this@WishlistFragment)
         binding?.wishlistToolbar?.let { NavigationUI.setupWithNavController(it, navHostFragment, appBarConfiguration) }
+
+        // recycler view setup
+        binding.rvWishlist.apply {
+            adapter = WishlistAdapter()
+        }
+
+        wishlistViewModel.getAllFavPlace().observe(viewLifecycleOwner, Observer {
+            // do something
+        })
     }
 
     override fun onDestroy() {

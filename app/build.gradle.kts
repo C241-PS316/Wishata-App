@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     id("com.google.gms.google-services")
+    id("com.google.devtools.ksp")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -66,20 +68,24 @@ dependencies {
     //  preference datastore
     implementation(libs.androidx.datastore.preferences)
 
-    // ViewModel
-    implementation("androidx.lifecycle:lifecycle-viewmodel:2.8.2")
-    // LiveData
-    implementation("androidx.lifecycle:lifecycle-livedata:2.8.2")
+    // lifescycle
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.lifecycle.livedata.ktx)
 
     // navigation ui, fragment
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
 
+    // kotlin coroutines
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.coroutines.android)
+
+    // room
+    implementation(libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler)
+
     //lifecyclescope
     implementation(libs.androidx.lifecycle.runtime.ktx)
-
-    // splash screen
-    implementation(libs.androidx.core.splashscreen)
 
 
 }

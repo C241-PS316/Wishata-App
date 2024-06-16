@@ -6,6 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvWishlist"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/wishlistToolbar"
         android:layout_width="match_parent"
@@ -18,6 +25,7 @@
     <!-- Recycle View -->
     <com.google.android.material.textview.MaterialTextView
         android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
         android:layout_height="wrap_content"
         android:text="This is wishlist"
         android:textSize="24sp"
