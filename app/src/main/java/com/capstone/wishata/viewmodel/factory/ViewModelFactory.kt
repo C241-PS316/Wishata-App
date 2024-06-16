@@ -7,6 +7,7 @@ import com.capstone.wishata.injection.Injection
 import com.capstone.wishata.repository.WishataRepository
 import com.capstone.wishata.viewmodel.LoginViewModel
 import com.capstone.wishata.viewmodel.RegisterViewModel
+import com.capstone.wishata.viewmodel.WishlistViewModel
 
 class ViewModelFactory(private val repository: WishataRepository): ViewModelProvider.NewInstanceFactory() {
 
@@ -18,6 +19,9 @@ class ViewModelFactory(private val repository: WishataRepository): ViewModelProv
             }
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
                 LoginViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(WishlistViewModel::class.java) -> {
+                WishlistViewModel(repository) as T
             }
 
 

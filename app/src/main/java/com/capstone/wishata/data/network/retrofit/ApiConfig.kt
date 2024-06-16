@@ -12,12 +12,12 @@ import retrofit2.converter.gson.GsonConverterFactory
 class ApiConfig {
 
     companion object{
-        fun getApiService(appPreferences: AppPreferences): ApiService {
+        fun getApiService(context: Context): ApiService {
             val loggingInterceptor =
                 HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
             val client = OkHttpClient.Builder()
                 .addInterceptor(loggingInterceptor)
-//                .addInterceptor(AssetFileInterceptor(context.assets))
+                .addInterceptor(AssetFileInterceptor(context.assets))
                 .build()
 
             val retrofit = Retrofit.Builder()

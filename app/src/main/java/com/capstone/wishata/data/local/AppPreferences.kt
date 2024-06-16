@@ -22,7 +22,7 @@ class AppPreferences private constructor(private val dataStore: DataStore<Prefer
         }
     }
 
-    suspend fun setUsername(username: String) {
+    suspend fun saveUsername(username: String) {
         dataStore.edit { pref ->
             pref[USERNAME] = username
         }
