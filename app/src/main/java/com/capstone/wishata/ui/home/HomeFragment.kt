@@ -7,12 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.capstone.wishata.R
 import com.capstone.wishata.adapter.HomeWisataAdapter
 import com.capstone.wishata.databinding.FragmentHomeBinding
 import com.capstone.wishata.utils.Result
 import com.capstone.wishata.viewmodel.HomeViewModel
 import com.capstone.wishata.viewmodel.factory.ViewModelFactory
+import com.google.android.material.search.SearchBar
+import com.google.android.material.search.SearchView
 
 
 class HomeFragment : Fragment() {
@@ -35,7 +41,25 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        fetchWisata()
+        val searchBar: SearchBar = view.findViewById(R.id.searchBar)
+        val appBarConfiguration = AppBarConfiguration(setOf(
+            R.id.navigation_home, R.id.navigation_wishlist, R.id.navigation_profile)
+        )
+
+        val navHostFragment = NavHostFragment.findNavController(this@HomeFragment)
+        NavigationUI.setupWithNavController(searchBar, navHostFragment, appBarConfiguration)
+
+        /*val searchView = view.findViewById<SearchView>(R.id.searchView)
+        searchView.setupWithSearchBar(searchBar)
+        searchView.editText
+            .setOnEditorActionListener { textView, actionId, event ->
+                searchBar.setText(searchView.text)
+                searchView.hide()
+                Toast.makeText(requireContext(), searchView.text, Toast.LENGTH_SHORT).show()
+                false
+            }*/
+
+        //fetchWisata()
     }
 
     private fun fetchWisata() {
