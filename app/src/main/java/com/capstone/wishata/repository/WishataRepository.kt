@@ -2,34 +2,37 @@ package com.capstone.wishata.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
-import com.capstone.wishata.data.Result
+import com.capstone.wishata.data.local.AppPreferences
 import com.capstone.wishata.data.network.response.ErrorResponse
 import com.capstone.wishata.data.network.response.LoginResponse
-import com.capstone.wishata.data.network.response.RegisterResponse
 import com.capstone.wishata.data.network.retrofit.ApiService
 import com.google.gson.Gson
 import retrofit2.HttpException
+import com.capstone.wishata.utils.Status
 
-class WishataRepository(private val apiService: ApiService) {
+class WishataRepository(
+    private val apiService: ApiService,
+    private val appPreferences: AppPreferences
+) {
 
-    fun register(username: String, email: String, password: String, confirmPassword: String) {
 
-    }
+
+    fun register(username: String, email: String, password: String, confirmPassword: String) {}
 
     fun login(
         username: String, password: String
-    ): LiveData<Result<LoginResponse>> = liveData {
-        emit(Result.Loading)
+    ): LiveData<Status<LoginResponse>> = liveData {
+        emit(Status.Loading)
         try {
             val response = apiService.login(username, password)
-            emit(Result.Success(response))
+            emit(Status.Success(response))
         } catch (e: HttpException) {
             val jsonInString = e.response()?.errorBody()?.string()
             val errorBody = Gson().fromJson(jsonInString, ErrorResponse::class.java)
             val errorMessage = errorBody.message
-            emit(Result.Error(errorMessage.toString()))
+            emit(Status.Error(errorMessage.toString()))
         } catch (e: Exception) {
-            emit(Result.Error(e.message.toString()))
+            emit(Status.Error(e.message.toString()))
         }
     }
 
@@ -37,8 +40,9 @@ class WishataRepository(private val apiService: ApiService) {
 
         // writing this code will create new instance and update object inside
         fun getInstance(
-            apiService: ApiService
-        ): WishataRepository = WishataRepository(apiService)
+            apiService: ApiService,
+            appPreferences: AppPreferences
+        ): WishataRepository = WishataRepository(apiService, appPreferences)
 
     }
 }

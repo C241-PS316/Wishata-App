@@ -18,6 +18,7 @@ interface ApiService {
         @Field("confirmPassword") confirmPassword: String
     ): RegisterResponse
 
+//    @GET("auth/login")
     @GET("assets/login_response")
     suspend fun login(
         @Field("username") username: String,
