@@ -22,9 +22,7 @@ class SplashActivity : AppCompatActivity() {
         }
 
         val thread = Thread{
-
             run {
-
                 try {
                     Thread.sleep(1000)
                 } catch (e: Exception) {
