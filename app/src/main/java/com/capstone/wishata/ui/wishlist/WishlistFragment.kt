@@ -6,11 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
-import com.capstone.wishata.R
+import com.capstone.wishata.data.local.database.entity.Place
 import com.capstone.wishata.databinding.FragmentWishlistBinding
 import com.capstone.wishata.viewmodel.WishlistViewModel
+import com.capstone.wishata.viewmodel.factory.ViewModelFactory
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -20,7 +20,6 @@ class WishlistFragment : Fragment() {
     private var param2: String? = null
     private var _binding: FragmentWishlistBinding? = null
     private val binding get() = _binding!!
-    private val wishlistViewModel: WishlistViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,18 +32,26 @@ class WishlistFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentWishlistBinding.inflate(inflater, container, false)
         val view = binding.root
-        binding.rvWishlist.apply {
-            adapter = WishlistAdapter()
+
+        binding.rvWishlist.layoutManager = GridLayoutManager(requireContext(), 2)
+
+        val factory = ViewModelFactory.getInstance(requireContext())
+        val wishlistViewModel: WishlistViewModel by viewModels<WishlistViewModel> { factory }
+
+        wishlistViewModel.getAllFavPlace().observe(viewLifecycleOwner) { allFavPlace ->
+            setAllFavPlace(allFavPlace)
         }
 
-        wishlistViewModel.getAllFavPlace().observe(viewLifecycleOwner, Observer {
-            // do something
-        })
-
         return view
+    }
+
+    private fun setAllFavPlace(allFavPlace: List<Place>) {
+        val adapter = WishlistAdapter()
+        adapter.submitList(allFavPlace)
+        binding.rvWishlist.adapter = adapter
     }
 
     override fun onDestroy() {
@@ -52,14 +59,4 @@ class WishlistFragment : Fragment() {
         _binding = null
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            WishlistFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 }
