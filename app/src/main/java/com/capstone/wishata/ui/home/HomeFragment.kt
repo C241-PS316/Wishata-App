@@ -59,21 +59,20 @@ class HomeFragment : Fragment() {
                 false
             }*/
 
-        //fetchWisata()
+        fetchWisata()
     }
 
     private fun fetchWisata() {
-        val wisataAdapter = HomeWisataAdapter()
+        val wisataAdapter = HomeWisataAdapter(requireContext())
 
-        /*binding?.rvWisata?.layoutManager = LinearLayoutManager(requireContext())
+        binding?.rvNearestPlaces?.layoutManager = LinearLayoutManager(requireContext())
+        binding?.rvNearestPlaces?.adapter = wisataAdapter
 
-        binding?.rvWisata?.adapter = wisataAdapter*/
-
-        /*homeViewModel.getWisata().observe(viewLifecycleOwner) { result ->
+        homeViewModel.getWisata().observe(viewLifecycleOwner) { result ->
             if (result != null) {
                 when (result) {
-                    is Result.Success<*> -> {
-                        wisataAdapter.setData(result.data.)
+                    is Result.Success -> {
+                        wisataAdapter.setData(result.data.data)
                         showToast("SUCCESS")
                     }
 
@@ -81,12 +80,12 @@ class HomeFragment : Fragment() {
                         showToast("ERROR")
                     }
 
-                    listOf(Result.Loading) -> {
+                    is Result.Loading -> {
                         showToast("Loading Mulai")
                     }
                 }
             }
-        }*/
+        }
 
 
     }

@@ -2,11 +2,12 @@ package com.capstone.wishata.data.network.retrofit
 
 import com.capstone.wishata.data.network.response.RegisterResponse
 import com.capstone.wishata.data.network.response.WisataResponse
-import com.capstone.wishata.data.network.response.WisataResponseItem
+import com.capstone.wishata.data.network.response.LoginResponse
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.POST
+
 
 interface ApiService {
 

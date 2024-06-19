@@ -8,7 +8,6 @@ import android.view.MenuItem
 import android.widget.Toast
 import android.window.OnBackInvokedDispatcher
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI

@@ -9,7 +9,8 @@ import kotlin.concurrent.Volatile
 
 @Database(
     entities = [Place::class],
-    version = 1
+    version = 1,
+    exportSchema = false
     )
 abstract class PlaceRoomDatabase: RoomDatabase() {
     abstract fun placeDao(): PlaceDao

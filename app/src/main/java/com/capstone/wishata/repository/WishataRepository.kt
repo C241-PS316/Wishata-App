@@ -62,7 +62,7 @@ class WishataRepository(
 
     }
 
-    // get all wishata
+    // get all wishata API
     fun getWisata(): LiveData<Result<WisataResponse>> = liveData {
         emit((Result.Loading))
         try {
@@ -74,6 +74,7 @@ class WishataRepository(
             val errorMessage = errorBody.message
             emit(Result.Error(errorMessage))
         }
+    }
 
     fun getUsername(): LiveData<String> {
         return appPreferences.getUsername().asLiveData()

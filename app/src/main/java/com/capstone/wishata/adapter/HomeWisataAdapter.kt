@@ -1,5 +1,6 @@
 package com.capstone.wishata.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -9,16 +10,21 @@ import com.capstone.wishata.data.network.response.WisataResponse
 import com.capstone.wishata.databinding.WisataItemBinding
 
 class HomeWisataAdapter(
-    private val listWisata: ArrayList<WisataResponse.WisataResponseItem> = arrayListOf()
+    private val context: Context,
+    private val listWisata: ArrayList<WisataResponse.WisataItem> = arrayListOf()
 ) : RecyclerView.Adapter<HomeWisataAdapter.WisataViewHolder>() {
 
     class WisataViewHolder(private val binding: WisataItemBinding): RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(wisataItem: WisataResponse.WisataResponseItem) {
+        fun bind(wisataItem: WisataResponse.WisataItem) {
             Glide.with(binding.root)
-                .load(wisataItem.photo)
+                .load(wisataItem.photoURL)
                 .error(R.drawable.ic_launcher_background)
                 .into(binding.image)
+
+            binding.textTitle.text = wisataItem.name
+            binding.textRating.text = wisataItem.rating.toString()
+
         }
     }
 
@@ -38,10 +44,9 @@ class HomeWisataAdapter(
     override fun getItemCount(): Int = listWisata.size
 
 
-    fun setData(wisata: List<WisataResponse.WisataResponseItem>) {
+    fun setData(wisata: List<WisataResponse.WisataItem>) {
         this.listWisata.clear()
         this.listWisata.addAll(wisata)
     }
-
 
 }

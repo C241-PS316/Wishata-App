@@ -1,27 +1,28 @@
 package com.capstone.wishata.ui.wishlist
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.GridLayoutManager
 import com.capstone.wishata.R
-import com.capstone.wishata.databinding.FragmentHomeBinding
 import com.capstone.wishata.databinding.FragmentWishlistBinding
-import com.capstone.wishata.databinding.FragmentWishlistBinding
+import com.capstone.wishata.viewmodel.HomeViewModel
 import com.capstone.wishata.viewmodel.WishlistViewModel
+import com.capstone.wishata.viewmodel.factory.ViewModelFactory
 
 class WishlistFragment : Fragment() {
-    private val wishlistViewModel: WishlistViewModel by viewModels()
 
     private var _binding: FragmentWishlistBinding? = null
     private val binding get() = _binding
+
+    private val wishlistViewModel by viewModels<WishlistViewModel> {
+        ViewModelFactory.getInstance(requireContext())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,13 +43,13 @@ class WishlistFragment : Fragment() {
         binding?.wishlistToolbar?.let { NavigationUI.setupWithNavController(it, navHostFragment, appBarConfiguration) }
 
         // recycler view setup
-        binding.rvWishlist.apply {
+        binding?.rvWishlist?.apply {
             adapter = WishlistAdapter()
         }
 
-        wishlistViewModel.getAllFavPlace().observe(viewLifecycleOwner, Observer {
+        /*wishlistViewModel.getAllFavPlace().observe(viewLifecycleOwner) {
             // do something
-        })
+        }*/
     }
 
     override fun onDestroy() {
@@ -56,7 +57,5 @@ class WishlistFragment : Fragment() {
         _binding = null
     }
 
-    companion object {
-
-    }
+    companion object {}
 }
