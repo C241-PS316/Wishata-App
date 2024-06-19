@@ -82,7 +82,8 @@ dependencies {
 
     // room
     implementation(libs.androidx.room.runtime)
-    ksp(libs.androidx.room.compiler)
+    ksp(libs.room.compiler)
+    implementation(libs.androidx.room.ktx)
 
     //lifecyclescope
     implementation(libs.androidx.lifecycle.runtime.ktx)
