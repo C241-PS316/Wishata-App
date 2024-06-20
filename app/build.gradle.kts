@@ -86,6 +86,7 @@ dependencies {
     ksp(libs.androidx.room.compiler) // To use Kotlin Symbol Processing (KSP)
     implementation(libs.androidx.room.ktx) //Kotlin Extensions and Coroutines support for Room
 
+
     //lifecyclescope
     implementation(libs.androidx.lifecycle.runtime.ktx)
 

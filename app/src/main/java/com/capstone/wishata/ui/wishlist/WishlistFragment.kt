@@ -10,15 +10,22 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.capstone.wishata.R
+
+import androidx.recyclerview.widget.GridLayoutManager
+import com.capstone.wishata.data.local.database.entity.Place
+
 import com.capstone.wishata.databinding.FragmentWishlistBinding
 import com.capstone.wishata.viewmodel.HomeViewModel
 import com.capstone.wishata.viewmodel.WishlistViewModel
 import com.capstone.wishata.viewmodel.factory.ViewModelFactory
 
+
 class WishlistFragment : Fragment() {
 
     private var _binding: FragmentWishlistBinding? = null
+
     private val binding get() = _binding
+
 
     private val wishlistViewModel by viewModels<WishlistViewModel> {
         ViewModelFactory.getInstance(requireContext())
@@ -27,6 +34,7 @@ class WishlistFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
+
     ): View? {
         _binding = FragmentWishlistBinding.inflate(layoutInflater, container, false)
         return binding?.root
@@ -46,10 +54,26 @@ class WishlistFragment : Fragment() {
         binding?.rvWishlist?.apply {
             adapter = WishlistAdapter()
         }
+        
+        binding.rvWishlist.layoutManager = GridLayoutManager(requireContext(), 2)
+
+        val factory = ViewModelFactory.getInstance(requireContext())
+        val wishlistViewModel: WishlistViewModel by viewModels<WishlistViewModel> { factory }
+
+        wishlistViewModel.getAllFavPlace().observe(viewLifecycleOwner) { allFavPlace ->
+            setAllFavPlace(allFavPlace)
+        }
 
         /*wishlistViewModel.getAllFavPlace().observe(viewLifecycleOwner) {
             // do something
         }*/
+
+    }
+
+    private fun setAllFavPlace(allFavPlace: List<Place>) {
+        val adapter = WishlistAdapter()
+        adapter.submitList(allFavPlace)
+        binding.rvWishlist.adapter = adapter
     }
 
     override fun onDestroy() {
@@ -57,5 +81,7 @@ class WishlistFragment : Fragment() {
         _binding = null
     }
 
+
     companion object {}
+
 }
