@@ -8,12 +8,14 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.wishata.R
 import com.capstone.wishata.adapter.HomeWisataAdapter
 import com.capstone.wishata.databinding.FragmentHomeBinding
+import com.capstone.wishata.ui.filter.FilterFragment
 import com.capstone.wishata.utils.Result
 import com.capstone.wishata.viewmodel.HomeViewModel
 import com.capstone.wishata.viewmodel.factory.ViewModelFactory
@@ -47,6 +49,21 @@ class HomeFragment : Fragment() {
         val navHostFragment = NavHostFragment.findNavController(this@HomeFragment)
         NavigationUI.setupWithNavController(searchBar, navHostFragment, appBarConfiguration)
 
+
+        binding.searchBar.setOnMenuItemClickListener {  menu ->
+            when(menu.itemId) {
+                R.id.action_filter -> {
+                    findNavController().navigate(R.id.action_navigation_home_to_filterFragment)
+                    true
+                }
+
+                else -> {
+                    false
+                }
+            }
+
+        }
+
         /*val searchView = view.findViewById<SearchView>(R.id.searchView)
         searchView.setupWithSearchBar(searchBar)
         searchView.editText
@@ -60,19 +77,19 @@ class HomeFragment : Fragment() {
         fetchWisata()
     }
 
-
     // Setting adapter, Layout, Set Data to adapter
     private fun fetchWisata() {
         val wisataAdapter = HomeWisataAdapter()
 
-        binding.rvNearestPlaces.layoutManager = LinearLayoutManager(requireActivity())
-        binding.rvNearestPlaces.adapter = wisataAdapter
+        binding.rvNearestPlaces.layoutManager = LinearLayoutManager(requireContext())
+
 
         homeViewModel.getWisata().observe(viewLifecycleOwner) { result ->
             if (result != null) {
                 when (result) {
                     is Result.Success -> {
                         wisataAdapter.setData(result.data.data)
+                        binding.rvNearestPlaces.adapter = wisataAdapter
                         showToast("SUCCESS")
                     }
 

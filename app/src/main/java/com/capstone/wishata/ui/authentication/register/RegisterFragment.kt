@@ -57,7 +57,9 @@ class RegisterFragment : Fragment() {
         val confirmPassword = binding.passwordConfirmEditText.text
 
         binding.registerButton.setOnClickListener {
-            register(userName.toString(), email.toString(), password.toString(), confirmPassword.toString())
+            register(userName.toString(), email.toString(), password.toString(),
+                confirmPassword.toString()
+            )
             Log.d(TAG, "Username: $userName\n, email: $email\n, password: $password\n, confirm: $confirmPassword\n")
 
         }
