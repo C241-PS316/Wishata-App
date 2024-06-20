@@ -9,13 +9,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
-import com.capstone.wishata.R
-
 import androidx.recyclerview.widget.GridLayoutManager
+import com.capstone.wishata.R
 import com.capstone.wishata.data.local.database.entity.Place
-
 import com.capstone.wishata.databinding.FragmentWishlistBinding
-import com.capstone.wishata.viewmodel.HomeViewModel
 import com.capstone.wishata.viewmodel.WishlistViewModel
 import com.capstone.wishata.viewmodel.factory.ViewModelFactory
 
@@ -55,7 +52,7 @@ class WishlistFragment : Fragment() {
             adapter = WishlistAdapter()
         }
         
-        binding.rvWishlist.layoutManager = GridLayoutManager(requireContext(), 2)
+        binding?.rvWishlist?.layoutManager = GridLayoutManager(requireContext(), 2)
 
         val factory = ViewModelFactory.getInstance(requireContext())
         val wishlistViewModel: WishlistViewModel by viewModels<WishlistViewModel> { factory }
@@ -73,7 +70,7 @@ class WishlistFragment : Fragment() {
     private fun setAllFavPlace(allFavPlace: List<Place>) {
         val adapter = WishlistAdapter()
         adapter.submitList(allFavPlace)
-        binding.rvWishlist.adapter = adapter
+        binding?.rvWishlist?.adapter = adapter
     }
 
     override fun onDestroy() {

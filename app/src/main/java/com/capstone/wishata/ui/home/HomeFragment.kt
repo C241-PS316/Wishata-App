@@ -24,7 +24,7 @@ import com.google.android.material.search.SearchView
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
-    private val binding get() = _binding
+    private val binding get() = _binding!!
 
     private val homeViewModel by viewModels<HomeViewModel> {
         ViewModelFactory.getInstance(requireContext())
@@ -33,9 +33,9 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
-        return binding?.root
+    ): View {
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -59,14 +59,14 @@ class HomeFragment : Fragment() {
                 false
             }*/
 
-        //fetchWisata()
+        fetchWisata()
     }
 
     private fun fetchWisata() {
         val wisataAdapter = HomeWisataAdapter(requireContext())
 
-        binding?.rvNearestPlaces?.layoutManager = LinearLayoutManager(requireContext())
-        binding?.rvNearestPlaces?.adapter = wisataAdapter
+        binding.rvNearestPlaces.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvNearestPlaces.adapter = wisataAdapter
 
         homeViewModel.getWisata().observe(viewLifecycleOwner) { result ->
             if (result != null) {
