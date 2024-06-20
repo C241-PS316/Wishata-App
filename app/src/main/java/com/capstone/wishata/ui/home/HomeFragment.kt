@@ -18,8 +18,6 @@ import com.capstone.wishata.utils.Result
 import com.capstone.wishata.viewmodel.HomeViewModel
 import com.capstone.wishata.viewmodel.factory.ViewModelFactory
 import com.google.android.material.search.SearchBar
-import com.google.android.material.search.SearchView
-
 
 class HomeFragment : Fragment() {
 
@@ -62,10 +60,12 @@ class HomeFragment : Fragment() {
         fetchWisata()
     }
 
-    private fun fetchWisata() {
-        val wisataAdapter = HomeWisataAdapter(requireContext())
 
-        binding.rvNearestPlaces.layoutManager = LinearLayoutManager(requireContext())
+    // Setting adapter, Layout, Set Data to adapter
+    private fun fetchWisata() {
+        val wisataAdapter = HomeWisataAdapter()
+
+        binding.rvNearestPlaces.layoutManager = LinearLayoutManager(requireActivity())
         binding.rvNearestPlaces.adapter = wisataAdapter
 
         homeViewModel.getWisata().observe(viewLifecycleOwner) { result ->
@@ -97,10 +97,6 @@ class HomeFragment : Fragment() {
 
     private fun showToast(message: String) {
         Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT).show()
-    }
-
-    companion object {
-        private const val TAG = "HOME__FRAGMENT"
     }
 
 }
