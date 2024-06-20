@@ -1,6 +1,5 @@
 package com.capstone.wishata.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -10,7 +9,6 @@ import com.capstone.wishata.data.network.response.WisataResponse
 import com.capstone.wishata.databinding.WisataItemBinding
 
 class HomeWisataAdapter(
-    private val context: Context,
     private val listWisata: ArrayList<WisataResponse.WisataItem> = arrayListOf()
 ) : RecyclerView.Adapter<HomeWisataAdapter.WisataViewHolder>() {
 
