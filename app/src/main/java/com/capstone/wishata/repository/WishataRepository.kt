@@ -57,7 +57,7 @@ class WishataRepository(
             val jsonInString = e.response()?.errorBody()?.string()
             val errorBody = Gson().fromJson(jsonInString, RegisterResponse::class.java)
             val errorMessage = errorBody.message
-            emit(Result.Error(errorMessage))
+            emit(Result.Error(errorMessage ?: "NULL"))
         }
 
     }
@@ -72,7 +72,7 @@ class WishataRepository(
             val jsonInString = e.response()?.errorBody()?.string()
             val errorBody = Gson().fromJson(jsonInString, RegisterResponse::class.java)
             val errorMessage = errorBody.message
-            emit(Result.Error(errorMessage))
+            emit(Result.Error(errorMessage ?: "ERROR"))
         }
     }
 

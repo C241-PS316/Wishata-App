@@ -21,7 +21,8 @@ interface ApiService {
     ): RegisterResponse
 
 //    @GET("auth/login")
-    @GET("assets/login_response")
+    @FormUrlEncoded
+    @POST("login")
     suspend fun login(
         @Field("username") username: String,
         @Field("password") password: String

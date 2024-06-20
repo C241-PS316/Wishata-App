@@ -1,5 +1,6 @@
 package com.capstone.wishata.ui.authentication
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.fragment.app.Fragment
 import com.capstone.wishata.R
 import com.capstone.wishata.databinding.FragmentWelcomeBinding
+import com.capstone.wishata.ui.authentication.login.LoginActivity
 import com.capstone.wishata.ui.authentication.register.RegisterFragment
 
 class WelcomeFragment : Fragment() {
@@ -35,6 +37,11 @@ class WelcomeFragment : Fragment() {
                     .replace(R.id.welcome_main_container, registerFragment, RegisterFragment::class.java.simpleName)
                     .addToBackStack(null)
                     .commit()
+            }
+
+
+            loginButton.setOnClickListener {
+                startActivity(Intent(requireContext(), LoginActivity::class.java))
             }
         }
 

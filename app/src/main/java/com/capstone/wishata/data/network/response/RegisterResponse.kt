@@ -2,8 +2,11 @@ package com.capstone.wishata.data.network.response
 
 import com.google.gson.annotations.SerializedName
 
-class RegisterResponse(
+data class RegisterResponse(
 
-    @field:SerializedName("message")
-    val message: String
+	@field:SerializedName("error")
+	val error: Boolean? = null,
+
+	@field:SerializedName("message")
+	val message: String? = null
 )

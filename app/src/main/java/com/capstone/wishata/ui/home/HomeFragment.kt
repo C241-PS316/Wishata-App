@@ -59,7 +59,7 @@ class HomeFragment : Fragment() {
                 false
             }*/
 
-        fetchWisata()
+        //fetchWisata()
     }
 
     private fun fetchWisata() {

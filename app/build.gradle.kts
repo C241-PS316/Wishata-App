@@ -80,9 +80,11 @@ dependencies {
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
 
-    // room
+    // Room
     implementation(libs.androidx.room.runtime)
     annotationProcessor(libs.androidx.room.compiler)
+    ksp(libs.androidx.room.compiler) // To use Kotlin Symbol Processing (KSP)
+    implementation(libs.androidx.room.ktx) //Kotlin Extensions and Coroutines support for Room
 
     //lifecyclescope
     implementation(libs.androidx.lifecycle.runtime.ktx)

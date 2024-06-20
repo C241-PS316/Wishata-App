@@ -28,6 +28,9 @@
             android:name=".ui.authentication.WelcomeActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.authentication.login.LoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.main.MainActivity"
             android:exported="true">
 
