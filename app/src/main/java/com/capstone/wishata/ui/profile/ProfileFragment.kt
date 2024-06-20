@@ -6,6 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
 import com.capstone.wishata.R
 import com.capstone.wishata.databinding.FragmentHomeBinding
 import com.capstone.wishata.databinding.FragmentProfileBinding
@@ -28,6 +31,14 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val appBarConfiguration = AppBarConfiguration(setOf(
+            R.id.navigation_home, R.id.navigation_wishlist, R.id.navigation_profile)
+        )
+
+        val navHostFragment = NavHostFragment.findNavController(this@ProfileFragment)
+        binding?.profileToolbar?.let { NavigationUI.setupWithNavController(it, navHostFragment, appBarConfiguration) }
+
 
         binding?.buttonLogout?.setOnClickListener {
             val logOutIntent = Intent(requireActivity(), WelcomeActivity::class.java)

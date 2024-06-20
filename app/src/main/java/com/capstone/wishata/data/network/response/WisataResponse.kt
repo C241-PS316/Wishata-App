@@ -4,33 +4,46 @@ import com.google.gson.annotations.SerializedName
 
 data class WisataResponse(
 
-	@field:SerializedName("WisataResponse")
-	val wisataResponse: List<WisataResponseItem>
-)
+	@field:SerializedName("data")
+	val data: List<WisataItem> = emptyList(),
 
-data class WisataResponseItem(
+	@field:SerializedName("error")
+	val error: Boolean,
 
-	@field:SerializedName("name")
-	val name: String? = null,
+	@field:SerializedName("message")
+	val message: String
+) {
 
-	@field:SerializedName("rating")
-	val rating: Any? = null,
+	data class WisataItem(
 
-	@field:SerializedName("photo")
-	val photo: String? = null,
+		@field:SerializedName("photoURL")
+		val photoURL: String,
 
-	@field:SerializedName("description")
-	val description: String? = null,
+		@field:SerializedName("name")
+		val name: String,
 
-	@field:SerializedName("id")
-	val id: String? = null,
+		@field:SerializedName("rating")
+		val rating: Any,
 
-	@field:SerializedName("environment")
-	val environment: String? = null,
+		@field:SerializedName("category_classes")
+		val categoryClasses: String,
 
-	@field:SerializedName("scenery")
-	val scenery: String? = null,
+		@field:SerializedName("description")
+		val description: String,
 
-	@field:SerializedName("category")
-	val category: String? = null
-)
+		@field:SerializedName("lon")
+		val lon: Any,
+
+		@field:SerializedName("id")
+		val id: String,
+
+		@field:SerializedName("lat")
+		val lat: Any,
+
+		@field:SerializedName("environment_classes")
+		val environmentClasses: String,
+
+		@field:SerializedName("scenery_classes")
+		val sceneryClasses: String
+	)
+}

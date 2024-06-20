@@ -79,7 +79,7 @@ class RegisterFragment : Fragment() {
                     }
                     is Result.Success -> {
                         binding.progressIndicator.visibility = View.GONE
-                        showMessage(result.data.message)
+                        result.data.message?.let { showMessage(it) }
                         parentFragmentManager.beginTransaction().remove(this).commit()
                     }
                 }

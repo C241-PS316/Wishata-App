@@ -42,6 +42,7 @@ class WishataRepository(
         appPreferences.saveUsername(username)
     }
 
+    // register user
     fun register(
         username: String,
         email: String,
@@ -56,22 +57,22 @@ class WishataRepository(
             val jsonInString = e.response()?.errorBody()?.string()
             val errorBody = Gson().fromJson(jsonInString, RegisterResponse::class.java)
             val errorMessage = errorBody.message
-            emit(Result.Error(errorMessage))
+            emit(Result.Error(errorMessage ?: "NULL"))
         }
 
     }
 
-    // get all wishata
-    //@SuppressLint("BuildListAdds")
-    fun getWisata(): LiveData<Result<List<WisataResponse>>> = liveData {
+    // get all wishata API
+    fun getWisata(): LiveData<Result<WisataResponse>> = liveData {
         emit((Result.Loading))
         try {
             val response = apiService.getWisata()
-            val wisata = response.wisataResponse
-            //emit(wisata)
-        } catch (e: Exception) {
-            Log.d("NewsRepository", "getHeadlineNews: ${e.message.toString()} ")
-            emit(Result.Error(e.message.toString()))
+            emit(Result.Success(response))
+        } catch (e: HttpException) {
+            val jsonInString = e.response()?.errorBody()?.string()
+            val errorBody = Gson().fromJson(jsonInString, RegisterResponse::class.java)
+            val errorMessage = errorBody.message
+            emit(Result.Error(errorMessage ?: "ERROR"))
         }
     }
 
@@ -99,6 +100,7 @@ class WishataRepository(
 
     companion object {
 
+        // writing this code will create new instance and update object inside
         fun getInstance(
             placeDao: PlaceDao,
             apiService: ApiService,
