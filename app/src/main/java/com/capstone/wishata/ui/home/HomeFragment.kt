@@ -1,11 +1,11 @@
 package com.capstone.wishata.ui.home
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -16,15 +16,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.wishata.R
 import com.capstone.wishata.adapter.HomeWisataAdapter
 import com.capstone.wishata.adapter.TopPlaceAdapter
-import com.capstone.wishata.data.network.response.WisataResponse
+import com.capstone.wishata.data.network.response.TopWisataResponse
 import com.capstone.wishata.databinding.FragmentHomeBinding
-import com.capstone.wishata.ui.filter.FilterFragment
 import com.capstone.wishata.utils.Result
 import com.capstone.wishata.utils.showToast
 import com.capstone.wishata.viewmodel.HomeViewModel
 import com.capstone.wishata.viewmodel.factory.ViewModelFactory
 import com.google.android.material.search.SearchBar
-import com.google.android.material.search.SearchView
 
 class HomeFragment : Fragment(), View.OnClickListener {
 
@@ -78,39 +76,15 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 false
             }*/
 
-        fetchWisata()
+
+        // tring to save location to room
+
+
         fetchTopPlace()
+        fetchNearestPlace()
     }
 
-    // Setting adapter, Layout, Set Data to adapter
-    private fun fetchWisata() {
-        val wisataAdapter = HomeWisataAdapter()
-
-        binding.rvNearestPlaces.layoutManager = GridLayoutManager(requireContext(), 2)
-
-        homeViewModel.getWisata().observe(viewLifecycleOwner) { result ->
-            if (result != null) {
-                when (result) {
-                    is Result.Success -> {
-                        wisataAdapter.setData(result.data.data)
-                        binding.rvNearestPlaces.adapter = wisataAdapter
-                        showToast("SUCCESS", requireContext())
-                    }
-
-                    is Result.Error -> {
-                        showToast("ERROR", requireContext())
-                    }
-
-                    is Result.Loading -> {
-                        showToast("Loading Mulai", requireContext())
-                    }
-                }
-            }
-        }
-
-    }
-
-    // Top Place
+    // Top Location
     private fun fetchTopPlace() {
         val topPlaceAdapter = TopPlaceAdapter()
 
@@ -122,19 +96,49 @@ class HomeFragment : Fragment(), View.OnClickListener {
                     is Result.Success -> {
                         topPlaceAdapter.setData(result.data.data)
                         binding.rvTopPlaces.adapter = topPlaceAdapter
-                        showToast("SUCCESS", requireContext())
+                        binding.progressIndicatorTop.visibility = View.GONE
                     }
 
                     is Result.Error -> {
-                        showToast("ERROR", requireContext())
+                        binding.progressIndicatorTop.visibility = View.GONE
+                        showToast(result.error, requireContext())
                     }
 
                     is Result.Loading -> {
-                        showToast("Loading Mulai", requireContext())
+                        binding.progressIndicatorTop.visibility = View.VISIBLE
                     }
                 }
             }
         }
+    }
+
+    // Nearest Location. Setting adapter, Layout, Set Data to adapter
+    private fun fetchNearestPlace() {
+        val wisataAdapter = HomeWisataAdapter()
+
+        binding.rvNearestPlaces.layoutManager = GridLayoutManager(requireContext(), 2)
+
+        homeViewModel.getWisata().observe(viewLifecycleOwner) { result ->
+            if (result != null) {
+                when (result) {
+                    is Result.Success -> {
+                        binding.progressIndicatorNearest.visibility = View.GONE
+                        wisataAdapter.setData(result.data.data)
+                        binding.rvNearestPlaces.adapter = wisataAdapter
+                    }
+
+                    is Result.Error -> {
+                        binding.progressIndicatorNearest.visibility = View.GONE
+                        showToast(result.error, requireContext())
+                    }
+
+                    is Result.Loading -> {
+                        binding.progressIndicatorNearest.visibility = View.VISIBLE
+                    }
+                }
+            }
+        }
+
     }
 
     override fun onClick(v: View?) {

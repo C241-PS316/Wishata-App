@@ -5,11 +5,11 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.authentication.WelcomeFragment"
-    android:background="#36BCFF">
+    android:background="@color/skyblue">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/image_welcome"
@@ -39,7 +39,7 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="64dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="64dp"
             android:text="Personalized travel tips for You. Discover hidden gems and sustainable adventures."
             android:textAlignment="center"
@@ -49,36 +49,48 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_explore" />
 
-        <Button
-            android:id="@+id/registerButton"
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:layout_marginStart="64dp"
-            android:layout_marginEnd="64dp"
-            android:layout_marginBottom="32dp"
-            android:background="@drawable/button_wishata_white"
-            android:text="Sign Up"
+        <!-- Bottom Button -->
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/textRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="96dp"
+            android:layout_marginBottom="48dp"
+            android:text="New to Wishata?"
             android:textColor="@color/white"
-            android:textStyle="bold"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <Button
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/textRegisterSingup"
+            android:layout_width="wrap_content"
+            android:layout_height="64dp"
+            android:layout_marginEnd="96dp"
+            android:layout_marginBottom="28dp"
+            android:gravity="center"
+            android:text="Sign Up"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textRegister" />
+
+        <ImageButton
             android:id="@+id/loginButton"
             android:layout_width="match_parent"
             android:layout_height="64dp"
             android:layout_marginStart="64dp"
             android:layout_marginEnd="64dp"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/button_wishata_white"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/login_button"
             android:text="Login"
-            android:textStyle="bold"
-            android:textSize="18sp"
             android:textAllCaps="false"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@+id/registerButton"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/textRegister"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 

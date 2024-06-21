@@ -13,11 +13,18 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.capstone.wishata.R
+import com.capstone.wishata.data.local.database.entity.Place
 import com.capstone.wishata.data.network.response.WisataResponse
 import com.capstone.wishata.databinding.WisataItemBinding
+import com.capstone.wishata.repository.WishataRepository
 import com.capstone.wishata.ui.detail.DetailWisataFragment
+import com.capstone.wishata.utils.showToast
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 
 class HomeWisataAdapter(
+
     private val listWisata: ArrayList<WisataResponse.WisataItem> = arrayListOf()
 ) : RecyclerView.Adapter<HomeWisataAdapter.WisataViewHolder>() {
 
@@ -38,7 +45,13 @@ class HomeWisataAdapter(
                 bundle.putParcelable(DetailWisataFragment.EXTRA_WISATA, wisataItem)
                 Navigation.findNavController(itemView).navigate(R.id.action_navigation_home_to_detailWisataFragment)
             }
+
+            // Trying save to room
+            binding.favoriteButton.setOnClickListener {
+                showToast("${ wisataItem.name } added to Wishlist", context = itemView.context)
+            }
         }
+
     }
 
     override fun onCreateViewHolder(

@@ -95,12 +95,12 @@ class WishataRepository(
     }
 
     fun login(
-        username: String, password: String
+        email: String, password: String
     ): LiveData<Result<LoginResponse>> = liveData {
         emit(Result.Loading)
         try {
-            val response = apiService.login(username, password)
-            saveUsername(username)
+            val response = apiService.login(email, password)
+            saveUsername(email)
             emit(Result.Success(response))
         } catch (e: HttpException) {
             val jsonInString = e.response()?.errorBody()?.string()

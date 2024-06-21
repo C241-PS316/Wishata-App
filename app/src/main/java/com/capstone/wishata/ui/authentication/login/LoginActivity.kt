@@ -2,6 +2,7 @@ package com.capstone.wishata.ui.authentication.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -32,18 +33,22 @@ class LoginActivity : AppCompatActivity() {
         val factory = ViewModelFactory.getInstance(this)
         val loginViewModel: LoginViewModel by viewModels<LoginViewModel> { factory}
 
-        binding.loginButton.setOnClickListener {
+        binding.buttonLogin.setOnClickListener {
             val username = binding.nameEditText.text.toString()
             val password = binding.passwordEditText.text.toString()
 
             loginViewModel.login(username, password).observe(this) {
                 if (it != null) {
                     when(it) {
-                        is Result.Loading-> {}
+                        is Result.Loading-> {
+                            binding.progressIndicator.visibility = View.VISIBLE
+                        }
                         is Result.Success -> {
+                            binding.progressIndicator.visibility = View.GONE
                             processLogin(username)
                         }
                         is Result.Error -> {
+                            binding.progressIndicator.visibility = View.GONE
                             showToast(it.error, this)
                         }
                     }

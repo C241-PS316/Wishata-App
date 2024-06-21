@@ -32,7 +32,7 @@ class WelcomeFragment : Fragment() {
         val registerFragment = RegisterFragment()
 
         binding?.apply {
-            registerButton.setOnClickListener {
+            textRegisterSingup.setOnClickListener {
                 parentFragmentManager.beginTransaction()
                     .replace(R.id.welcome_main_container, registerFragment, RegisterFragment::class.java.simpleName)
                     .addToBackStack(null)
