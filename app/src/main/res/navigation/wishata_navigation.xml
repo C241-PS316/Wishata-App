@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_navigation_home_to_filterFragment"
             app:destination="@id/filterFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_detailWisataFragment"
+            app:destination="@id/detailWisataFragment" />
     </fragment>
 
     <fragment
@@ -35,6 +38,11 @@
             android:id="@+id/action_filterFragment_to_navigation_home"
             app:destination="@id/navigation_home" />
     </fragment>
+    <fragment
+        android:id="@+id/detailWisataFragment"
+        android:name="com.capstone.wishata.ui.detail.DetailWisataFragment"
+        android:label="fragment_detail_wisata"
+        tools:layout="@layout/fragment_detail_wisata" />
 
 
 </navigation>

@@ -11,17 +11,22 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.wishata.R
 import com.capstone.wishata.adapter.HomeWisataAdapter
+import com.capstone.wishata.adapter.TopPlaceAdapter
+import com.capstone.wishata.data.network.response.WisataResponse
 import com.capstone.wishata.databinding.FragmentHomeBinding
 import com.capstone.wishata.ui.filter.FilterFragment
 import com.capstone.wishata.utils.Result
+import com.capstone.wishata.utils.showToast
 import com.capstone.wishata.viewmodel.HomeViewModel
 import com.capstone.wishata.viewmodel.factory.ViewModelFactory
 import com.google.android.material.search.SearchBar
+import com.google.android.material.search.SearchView
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), View.OnClickListener {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -64,25 +69,24 @@ class HomeFragment : Fragment() {
 
         }
 
-        /*val searchView = view.findViewById<SearchView>(R.id.searchView)
-        searchView.setupWithSearchBar(searchBar)
-        searchView.editText
+        /*binding.searchView.setupWithSearchBar(binding.searchBar)
+        binding.searchView.editText
             .setOnEditorActionListener { textView, actionId, event ->
-                searchBar.setText(searchView.text)
-                searchView.hide()
-                Toast.makeText(requireContext(), searchView.text, Toast.LENGTH_SHORT).show()
+                searchBar.setText(binding.searchView.text)
+                binding.searchView.hide()
+                Toast.makeText(requireContext(), binding.searchView.text, Toast.LENGTH_SHORT).show()
                 false
             }*/
 
         fetchWisata()
+        fetchTopPlace()
     }
 
     // Setting adapter, Layout, Set Data to adapter
     private fun fetchWisata() {
         val wisataAdapter = HomeWisataAdapter()
 
-        binding.rvNearestPlaces.layoutManager = LinearLayoutManager(requireContext())
-
+        binding.rvNearestPlaces.layoutManager = GridLayoutManager(requireContext(), 2)
 
         homeViewModel.getWisata().observe(viewLifecycleOwner) { result ->
             if (result != null) {
@@ -90,30 +94,56 @@ class HomeFragment : Fragment() {
                     is Result.Success -> {
                         wisataAdapter.setData(result.data.data)
                         binding.rvNearestPlaces.adapter = wisataAdapter
-                        showToast("SUCCESS")
+                        showToast("SUCCESS", requireContext())
                     }
 
                     is Result.Error -> {
-                        showToast("ERROR")
+                        showToast("ERROR", requireContext())
                     }
 
                     is Result.Loading -> {
-                        showToast("Loading Mulai")
+                        showToast("Loading Mulai", requireContext())
                     }
                 }
             }
         }
 
+    }
 
+    // Top Place
+    private fun fetchTopPlace() {
+        val topPlaceAdapter = TopPlaceAdapter()
+
+        binding.rvTopPlaces.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+
+        homeViewModel.getTopPlace().observe(viewLifecycleOwner) { result ->
+            if (result != null) {
+                when (result) {
+                    is Result.Success -> {
+                        topPlaceAdapter.setData(result.data.data)
+                        binding.rvTopPlaces.adapter = topPlaceAdapter
+                        showToast("SUCCESS", requireContext())
+                    }
+
+                    is Result.Error -> {
+                        showToast("ERROR", requireContext())
+                    }
+
+                    is Result.Loading -> {
+                        showToast("Loading Mulai", requireContext())
+                    }
+                }
+            }
+        }
+    }
+
+    override fun onClick(v: View?) {
+        //
     }
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
-    }
-
-    private fun showToast(message: String) {
-        Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT).show()
     }
 
 }

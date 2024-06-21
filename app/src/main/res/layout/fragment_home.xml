@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
-            android:hint="Cari Wisata"
+            android:hint="Cari Lokasi"
             app:menu="@menu/home_appbar_menu"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -42,8 +42,8 @@
 
 
     <!--Top Places-->
-    <!--<com.google.android.material.textview.MaterialTextView
-        android:id="@+id/text_topPlaces"
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/textTopPlaces"
         style="@style/TextAppearance.Material3.TitleMedium"
         android:layout_width="wrap_content"
         android:layout_height="32dp"
@@ -58,15 +58,17 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_topPlaces"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="150dp"
+        tools:listitem="@layout/item_top_place"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_topPlaces" />-->
+        app:layout_constraintTop_toBottomOf="@+id/textTopPlaces" />
 
 
     <!--Nearest Places-->
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/text_mearestPlaces"
+        android:id="@+id/textNearestPlaces"
         style="@style/TextAppearance.Material3.TitleMedium"
         android:layout_width="wrap_content"
         android:layout_height="32dp"
@@ -75,16 +77,19 @@
         android:textStyle="bold"
         android:gravity="center_vertical"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/rv_topPlaces" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_nearestPlaces"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:listitem="@layout/wisata_item"
+        android:layout_height="350dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_mearestPlaces" />
+        app:layout_constraintTop_toBottomOf="@id/textNearestPlaces"
+        app:spanCount="2"
+        tools:listitem="@layout/wisata_item" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

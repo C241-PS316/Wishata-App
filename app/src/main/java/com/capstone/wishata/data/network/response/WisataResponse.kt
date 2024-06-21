@@ -1,6 +1,8 @@
 package com.capstone.wishata.data.network.response
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 data class WisataResponse(
 
@@ -13,6 +15,7 @@ data class WisataResponse(
 	@field:SerializedName("message")
 	val message: String
 ) {
+	@Parcelize
 
 	data class WisataItem(
 
@@ -23,7 +26,7 @@ data class WisataResponse(
 		val name: String,
 
 		@field:SerializedName("rating")
-		val rating: Any,
+		val rating: Double,
 
 		@field:SerializedName("category_classes")
 		val categoryClasses: String,
@@ -32,18 +35,18 @@ data class WisataResponse(
 		val description: String,
 
 		@field:SerializedName("lon")
-		val lon: Any,
+		val lon: Double,
 
 		@field:SerializedName("id")
 		val id: String,
 
 		@field:SerializedName("lat")
-		val lat: Any,
+		val lat: Double,
 
 		@field:SerializedName("environment_classes")
 		val environmentClasses: String,
 
 		@field:SerializedName("scenery_classes")
 		val sceneryClasses: String
-	)
+	): Parcelable
 }

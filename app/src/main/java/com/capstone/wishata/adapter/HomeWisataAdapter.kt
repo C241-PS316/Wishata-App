@@ -1,12 +1,21 @@
 package com.capstone.wishata.adapter
 
+import android.app.Activity
+import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView.OnItemClickListener
+import android.widget.Toast
+import androidx.core.app.ActivityOptionsCompat
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.capstone.wishata.R
 import com.capstone.wishata.data.network.response.WisataResponse
 import com.capstone.wishata.databinding.WisataItemBinding
+import com.capstone.wishata.ui.detail.DetailWisataFragment
 
 class HomeWisataAdapter(
     private val listWisata: ArrayList<WisataResponse.WisataItem> = arrayListOf()
@@ -23,6 +32,12 @@ class HomeWisataAdapter(
             binding.textTitle.text = wisataItem.name
             binding.textRating.text = wisataItem.rating.toString()
 
+            itemView.setOnClickListener {
+                val bundle = Bundle()
+                Toast.makeText(itemView.context, "${wisataItem.name}", Toast.LENGTH_SHORT).show()
+                bundle.putParcelable(DetailWisataFragment.EXTRA_WISATA, wisataItem)
+                Navigation.findNavController(itemView).navigate(R.id.action_navigation_home_to_detailWisataFragment)
+            }
         }
     }
 

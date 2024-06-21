@@ -19,6 +19,10 @@ data class Place(
 	@field:SerializedName("namePlace")
 	val namePlace: String,
 
+	@ColumnInfo(name = "description")
+	@field:SerializedName("description")
+	val description: String,
+
 	@ColumnInfo(name = "rating")
 	@field:SerializedName("rating")
 	val rating: Double,

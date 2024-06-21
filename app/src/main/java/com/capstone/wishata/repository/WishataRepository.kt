@@ -10,6 +10,7 @@ import com.capstone.wishata.data.local.database.PlaceDao
 import com.capstone.wishata.data.network.response.ErrorResponse
 import com.capstone.wishata.data.network.response.LoginResponse
 import com.capstone.wishata.data.network.response.RegisterResponse
+import com.capstone.wishata.data.network.response.TopWisataResponse
 import com.capstone.wishata.data.network.response.WisataResponse
 import com.capstone.wishata.data.network.retrofit.ApiService
 import com.google.gson.Gson
@@ -70,12 +71,25 @@ class WishataRepository(
             emit(Result.Success(response))
         } catch (e: HttpException) {
             val jsonInString = e.response()?.errorBody()?.string()
-            val errorBody = Gson().fromJson(jsonInString, RegisterResponse::class.java)
+            val errorBody = Gson().fromJson(jsonInString, WisataResponse::class.java)
             val errorMessage = errorBody.message
             emit(Result.Error(errorMessage ?: "ERROR"))
         }
     }
 
+    // get Top Place
+    fun getTopPlace(): LiveData<Result<TopWisataResponse>> = liveData {
+        emit((Result.Loading))
+        try {
+            val response = apiService.getTopPlace()
+            emit(Result.Success(response))
+        } catch (e: HttpException) {
+            val jsonInString = e.response()?.errorBody()?.string()
+            val errorBody = Gson().fromJson(jsonInString, TopWisataResponse::class.java)
+            val errorMessage = errorBody.message
+            emit(Result.Error(errorMessage ?: "ERROR"))
+        }
+    }
     fun getUsername(): LiveData<String> {
         return appPreferences.getUsername().asLiveData()
     }

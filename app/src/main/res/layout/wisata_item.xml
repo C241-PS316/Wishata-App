@@ -13,16 +13,36 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/image"
+        <FrameLayout
+            android:id="@+id/imageFrame"
             android:layout_width="match_parent"
-            android:layout_height="128dp"
-            android:contentDescription="TODO"
-            android:scaleType="fitXY"
-            android:src="@drawable/ic_launcher_background"
+            android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="128dp"
+                android:contentDescription="Image of place"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_launcher_background" />
+
+            <ImageButton
+                android:id="@+id/favoriteButton"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="@drawable/button_favorite"
+                android:layout_gravity="bottom|end"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:contentDescription="Add to favorite"
+                android:src="@drawable/favorite_empty"/>
+
+        </FrameLayout>
+
+
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/text_title"
@@ -34,7 +54,7 @@
             android:textAlignment="textStart"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/image" />
+            app:layout_constraintTop_toBottomOf="@+id/imageFrame" />
 
         <LinearLayout
             android:id="@+id/layout_rating"

@@ -1,13 +1,14 @@
 package com.capstone.wishata.ui.detail
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.capstone.wishata.R
+import androidx.fragment.app.Fragment
+import com.capstone.wishata.data.network.response.WisataResponse
 import com.capstone.wishata.databinding.FragmentDetailWisataBinding
-import com.capstone.wishata.databinding.FragmentHomeBinding
 
 
 class DetailWisataFragment : Fragment() {
@@ -18,15 +19,22 @@ class DetailWisataFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentDetailWisataBinding.inflate(inflater, container, false)
         return binding.root
     }
 
+    @SuppressLint("NewApi")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val wisataItem = arguments?.getParcelable<WisataResponse.WisataItem>(EXTRA_WISATA)
+
+
+        binding.textTitle.text = wisataItem?.name ?: "Judul"
+        binding.textDescription.text = wisataItem?.description ?: "Description"
+        binding.ratingText.text = wisataItem?.rating.toString()
 
     }
 
@@ -36,5 +44,7 @@ class DetailWisataFragment : Fragment() {
     }
 
     companion object {
+        const val EXTRA_WISATA = "extra_wisata"
+
     }
 }

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imageTopPlace"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:contentDescription="Image of place"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_launcher_background" />
+
+        <ImageButton
+            android:id="@+id/favoriteButton"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@drawable/button_favorite"
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="Add to favorite"
+            android:src="@drawable/favorite_empty"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/textTitleTopPlace"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_gravity="bottom|start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nama Lokasi"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textSize="24sp"/>
+
+    </FrameLayout>
+
+</com.google.android.material.card.MaterialCardView>

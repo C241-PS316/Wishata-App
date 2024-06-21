@@ -3,6 +3,7 @@ package com.capstone.wishata.data.network.retrofit
 import com.capstone.wishata.data.network.response.RegisterResponse
 import com.capstone.wishata.data.network.response.WisataResponse
 import com.capstone.wishata.data.network.response.LoginResponse
+import com.capstone.wishata.data.network.response.TopWisataResponse
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
@@ -30,5 +31,8 @@ interface ApiService {
 
     @GET("wisata")
     suspend fun getWisata(): WisataResponse
+
+    @GET("wisata/top")
+    suspend fun getTopPlace(): TopWisataResponse
 
 }
